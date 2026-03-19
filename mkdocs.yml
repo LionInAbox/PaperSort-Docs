@@ -1,8 +1,11 @@
 site_name: Paper Sort - Official Documentation
 nav:
-  - Main: index.md
+  - Overview: index.md
+  - PaperSort/PaperBox: papersort.md
+  - PaperFloat: paperfloat.md
+  - PaperShadow: papershadow.md
   # add links to your other files. e.g.:
-  - Features: features.md
+  # - Features: features.md
 theme:
   name: material
   palette:
