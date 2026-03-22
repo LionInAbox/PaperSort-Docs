@@ -466,7 +466,7 @@
   <span class="md-ellipsis">
     
   
-    PaperSort/PaperBox
+    Sorting components
   
 
     
@@ -493,7 +493,7 @@
   <span class="md-ellipsis">
     
   
-    PaperFloat
+    Height and Flight
   
 
     
@@ -520,7 +520,7 @@
   <span class="md-ellipsis">
     
   
-    PaperShadow
+    Shadow
   
 
     
@@ -733,7 +733,7 @@
 
 <h1 id="papersort-plugin-documentation">PaperSort — Plugin Documentation<a class="headerlink" href="#papersort-plugin-documentation" title="Permanent link">&para;</a></h1>
 <p><strong>Advanced 2D sprite sorting and altitude simulation for Paper2D.</strong></p>
-<p>PaperSort gives you everything you need to handle Y-based depth sorting, height illusions, movement, and shadows for Paper2D games — all from simple, drop-in components.</p>
+<p>PaperSort gives you everything you need to handle Y-based depth sorting, height illusions, collision, and shadows for Paper2D games — all from simple, drop-in components.</p>
 <p><img alt="Plugin overview banner" src="insert_image: banner showing a 2D scene with correctly sorted sprites at different depths" /></p>
 <hr />
 <h2 id="table-of-contents">Table of Contents<a class="headerlink" href="#table-of-contents" title="Permanent link">&para;</a></h2>
@@ -775,7 +775,7 @@
 <hr />
 <h2 id="papersort-and-paperbox-automatic-sprite-sorting-components">PaperSort and PaperBox (Automatic sprite sorting components)<a class="headerlink" href="#papersort-and-paperbox-automatic-sprite-sorting-components" title="Permanent link">&para;</a></h2>
 <p>The PaperSort plugin comes with two sorting components, <strong>PaperSort</strong> and <strong>PaperBox</strong>, that both automate 2D sprite sorting on the Y axis.</p>
-<p>PaperSort's and PaperBox's sorting mechanisms are two separate systems and don't work together. PaperSort sets the Translucency Sort Priority of each sprite to it's y value. PaperBox uses Unreal Engine's built-in Sort by Axis ordering. PaperSort is much easier to set up than PaperBox, but is less performant (up to +1000 moving sprites, versus PaperBox multiple 10000 moving sprites)</p>
+<p>PaperSort's and PaperBox's sorting mechanisms are two separate systems and don't work together. PaperSort sets the Translucency Sort Priority of each sprite to it's y value. PaperBox uses Unreal Engine's built-in Sort by Axis ordering. PaperSort is much easier to set up than PaperBox, but is less performant (up to +1000 moving sprites, versus PaperBox several 10000 moving sprites)</p>
 <h4 id="comparison-papersort-vs-paperbox-component">Comparison: PaperSort vs. PaperBox Component<a class="headerlink" href="#comparison-papersort-vs-paperbox-component" title="Permanent link">&para;</a></h4>
 <table>
 <thead>
@@ -789,7 +789,7 @@
 <tr>
 <td><strong>Effort</strong></td>
 <td>Drop in, done (+ set background map's Translucent Sort Priority to -1,000,000)</td>
-<td>Requires project settings + hierarchy setup</td>
+<td>Requires project settings + hierarchy setup + positioning sprites around box center</td>
 </tr>
 <tr>
 <td><strong>Performance</strong></td>

@@ -23,7 +23,7 @@
     
     
       
-        <title>PaperSort/PaperBox - Paper Sort - Official Documentation</title>
+        <title>Sorting components - Paper Sort - Official Documentation</title>
       
     
     
@@ -110,7 +110,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              PaperSort/PaperBox
+              Sorting components
             
           </span>
         </div>
@@ -275,7 +275,7 @@
   <span class="md-ellipsis">
     
   
-    PaperSort/PaperBox
+    Sorting components
   
 
     
@@ -293,7 +293,7 @@
   <span class="md-ellipsis">
     
   
-    PaperSort/PaperBox
+    Sorting components
   
 
     
@@ -440,7 +440,7 @@
   <span class="md-ellipsis">
     
   
-    PaperFloat
+    Height and Flight
   
 
     
@@ -467,7 +467,7 @@
   <span class="md-ellipsis">
     
   
-    PaperShadow
+    Shadow
   
 
     
@@ -625,8 +625,8 @@
 
 <h1 id="papersort-paperbox-sorting-components">PaperSort &amp; PaperBox — Sorting Components<a class="headerlink" href="#papersort-paperbox-sorting-components" title="Permanent link">&para;</a></h1>
 <p>The PaperSort plugin comes with two sorting components, <strong>PaperSort</strong> and <strong>PaperBox</strong>, that both automate 2D sprite sorting on the Y axis.</p>
-<p>PaperSort's and PaperBox's sorting mechanisms are two separate systems and don't work together. PaperSort sets the Translucency Sort Priority of each sprite to it's y value. PaperBox uses Unreal Engine's built-in Sort by Axis ordering. PaperSort is much easier to set up than PaperBox, but is less performant (up to +1000 moving sprites, versus PaperBox multiple 10000 moving sprites). PaperBox can also have a slightly better pixel precision for sorting in certain edge cases.</p>
-<p>For globally applied sorting it's recommended to use either only PaperSort or PaperBox in the same level.</p>
+<p>PaperSort's and PaperBox's sorting mechanisms are two separate systems and don't work together. PaperSort sets the Translucency Sort Priority of each sprite to it's y value. PaperBox uses Unreal Engine's built-in Sort by Axis ordering. PaperSort is much easier to set up than PaperBox, but handles fewer sprites — around 1,000+ moving sprites versus several 10,000s with PaperBox. PaperBox also offers slightly better pixel precision for sorting.
+For globally applied sorting it's recommended to use either only PaperSort or PaperBox in the same level.</p>
 <h4 id="comparison-papersort-vs-paperbox-component">Comparison: PaperSort vs. PaperBox Component<a class="headerlink" href="#comparison-papersort-vs-paperbox-component" title="Permanent link">&para;</a></h4>
 <table>
 <thead>
@@ -677,7 +677,9 @@
 <p>Each PaperSort manages the sprites and flipbooks in its parent's subtree, stopping at branches claimed by another PaperSort and another PaperSort's child sprites. This lets you sort different sprite groups independently on the same actor.</p>
 <p><strong>Debug visualization (editor and viewport only):</strong> A crosshair and dashed sorting line are drawn in the viewport. This line visualizes the reference point where the sorting happens. Anything above that point will be sorted behind, and anything below sorted in front.</p>
 <p><img alt="PaperSort debug visualization" src="insert_image: editor viewport showing the crosshair and dashed sorting line on a character" /></p>
-<p><strong>* why <code>-1,000,000</code>:</strong> your sprites are most like never going to travel below the y position of -1,000,000 on the y axis, so you're safe that the background will never be sorted in front and cover the remaining sprites. Feel free to adjust that number to your needs.</p>
+<blockquote>
+<p><strong><em>* About the value:</em></strong> Your sprites will most likely never reach a y position of <code>-1,000,000</code>, so the background is guaranteed to sort behind everything else. Adjust as needed.</p>
+</blockquote>
 <hr />
 <h3 id="paperbox">PaperBox<a class="headerlink" href="#paperbox" title="Permanent link">&para;</a></h3>
 <p>Bounding-box sorting. More setup, but uses Unreal Engine's built-in sorting system for maximum performance.</p>
@@ -692,8 +694,8 @@
 <ol>
 <li>Add a <strong>PaperBox</strong> component to your actor.</li>
 <li>Make your sprites and flipbooks <strong>children</strong> of PaperBox in the component hierarchy.</li>
-<li>Place them so that their sorting origin is the center of the PaperBox (the center is marked with a dashed line and a cross hair)</li>
-<li>The box auto-sizes to fit child sprites and flipbooks in the editor (when <strong>Auto Fit Box</strong> is enabled).</li>
+<li>Place them so that their sorting origin is the center of the PaperBox (the center is marked with a base line and the box wireframe).</li>
+<li>The box auto-sizes to fit child sprites and flipbooks in the editor (when <strong>Auto-Fit Box</strong> is enabled).</li>
 </ol>
 <p><img alt="PaperBox hierarchy" src="insert_image: component hierarchy showing sprites as children of PaperBox" /></p>
 <p><strong>PaperZD characters:</strong> Create an additional flipbook component, so you can add it as a child of PaperBox, use it for PaperZD animations, and hide the original built-in flipbook.</p>
@@ -708,15 +710,23 @@
 <tbody>
 <tr>
 <td><strong>Update In Game</strong></td>
-<td>Recalculate bounding box every frame at runtime. Enable for sprites that change size or altitude during gameplay (animations with varying dimensions, flying sprites). Disable for static props and backgrounds — the bounds are set once and never tick, giving you zero runtime cost.</td>
+<td>Recalculate bounding box every frame at runtime. Enable for sprites that change size or altitude during gameplay (animations with varying dimensions, flying sprites). Disable for fixed-size animations, static props and backgrounds — the bounds are set once and never tick, giving you zero runtime cost. When enabled, all editor-only options below are greyed out.</td>
 </tr>
 <tr>
-<td><strong>Auto Fit Box</strong></td>
-<td>Editor only. When enabled, the box automatically adjusts its bounds to fit all child sprites and flipbooks whenever they are added or moved. When disabled, the box stays where you left it — an <strong>Auto Fit</strong> button available with <code>Auto Fit Box</code> unchecked. It lets you trigger a one-time auto fit, after which you can continue to adjust the box manually.</td>
+<td><strong>Auto-Fit Box</strong></td>
+<td>Editor only. When enabled, the box continuously adjusts its bounds to fit all child sprites and flipbooks whenever they are added or moved. Greyed out when Update In Game is enabled.</td>
 </tr>
 <tr>
 <td><strong>Box Padding</strong></td>
-<td>Extra padding around the auto-calculated extents (only when Update In Game is off).</td>
+<td>Extra padding around the auto-calculated extents. Only available when Auto-Fit Box is enabled (and Update In Game is disabled).</td>
+</tr>
+<tr>
+<td><strong>Auto-Fit Once</strong></td>
+<td>Button. Performs a one-time fit of the box to child bounds (without padding). Only available when Auto-Fit Box is disabled and Update In Game is disabled. After fitting, you can continue to adjust the box manually via Box Extent.</td>
+</tr>
+<tr>
+<td><strong>Box Extent</strong></td>
+<td>Manual XY size control. Only available when both Auto-Fit Box and Update In Game are disabled. Lets you set the box dimensions directly.</td>
 </tr>
 </tbody>
 </table>

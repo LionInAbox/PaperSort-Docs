@@ -23,7 +23,7 @@
     
     
       
-        <title>PaperFloat - Paper Sort - Official Documentation</title>
+        <title>Height and Flight - Paper Sort - Official Documentation</title>
       
     
     
@@ -110,7 +110,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              PaperFloat
+              Height and Flight
             
           </span>
         </div>
@@ -266,7 +266,7 @@
   <span class="md-ellipsis">
     
   
-    PaperSort/PaperBox
+    Sorting components
   
 
     
@@ -302,7 +302,7 @@
   <span class="md-ellipsis">
     
   
-    PaperFloat
+    Height and Flight
   
 
     
@@ -320,7 +320,7 @@
   <span class="md-ellipsis">
     
   
-    PaperFloat
+    Height and Flight
   
 
     
@@ -444,7 +444,7 @@
   <span class="md-ellipsis">
     
   
-    PaperShadow
+    Shadow
   
 
     
@@ -662,7 +662,7 @@
 </tbody>
 </table>
 <h4 id="shadow-tracking">Shadow Tracking<a class="headerlink" href="#shadow-tracking" title="Permanent link">&para;</a></h4>
-<p>When a character is airborne, the shadow stays on the ground below them automatically.</p>
+<p>When a character is airborne, the shadow stays on the ground below them automatically. The shadow can also shrink and fade with distance to create a natural sense of depth.</p>
 <table>
 <thead>
 <tr>
@@ -681,7 +681,23 @@
 </tr>
 <tr>
 <td><strong>Use Collision Shape for Shadow Positioning</strong></td>
-<td>Full shape sweep instead of center ray. Slighly more expensive, but more accurate shadow placement near ledges, needed when jumping or flying over ramps and elevated areas.</td>
+<td>Full shape sweep instead of center ray. Slightly more expensive, but more accurate shadow placement near ledges, needed when jumping or flying over ramps and elevated areas.</td>
+</tr>
+<tr>
+<td><strong>Shrink with Distance</strong></td>
+<td>The shadow scales down linearly as distance to the ground increases. At ground level the shadow is full size; at the vanish distance it disappears. Enabled by default.</td>
+</tr>
+<tr>
+<td><strong>Vanish Distance</strong></td>
+<td>The distance at which the shadow reaches zero scale. Default 500.</td>
+</tr>
+<tr>
+<td><strong>Fade Opacity with Distance</strong></td>
+<td>The shadow's opacity fades linearly as distance to the ground increases. Stacks with the base opacity set on the shadow component. Enabled by default.</td>
+</tr>
+<tr>
+<td><strong>Opacity Vanish Distance</strong></td>
+<td>The distance at which the shadow becomes fully transparent. Default 300.</td>
 </tr>
 </tbody>
 </table>
