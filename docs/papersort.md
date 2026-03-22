@@ -2,8 +2,7 @@
 
 The PaperSort plugin comes with two sorting components, **PaperSort** and **PaperBox**, that both automate 2D sprite sorting on the Y axis.
 
-PaperSort's and PaperBox's sorting mechanisms are two separate systems and don't work together. PaperSort sets the Translucency Sort Priority of each sprite to it's y value. PaperBox uses Unreal Engine's built-in Sort by Axis ordering. PaperSort is much easier to set up than PaperBox, but is less performant (up to +1000 moving sprites, versus PaperBox multiple 10000 moving sprites). PaperBox can also have a slightly better pixel precision for sorting in certain edge cases.
-
+PaperSort's and PaperBox's sorting mechanisms are two separate systems and don't work together. PaperSort sets the Translucency Sort Priority of each sprite to it's y value. PaperBox uses Unreal Engine's built-in Sort by Axis ordering. PaperSort is much easier to set up than PaperBox, but handles fewer sprites — around 1,000+ moving sprites versus several 10,000s with PaperBox. PaperBox also offers slightly better pixel precision for sorting.
 For globally applied sorting it's recommended to use either only PaperSort or PaperBox in the same level.
 
 #### Comparison: PaperSort vs. PaperBox Component
@@ -35,7 +34,7 @@ Each PaperSort manages the sprites and flipbooks in its parent's subtree, stoppi
 
 ![PaperSort debug visualization](insert_image: editor viewport showing the crosshair and dashed sorting line on a character)
 
-**\* why `-1,000,000`:** your sprites are most like never going to travel below the y position of -1,000,000 on the y axis, so you're safe that the background will never be sorted in front and cover the remaining sprites. Feel free to adjust that number to your needs.
+>***\* About the value:*** Your sprites will most likely never reach a y position of `-1,000,000`, so the background is guaranteed to sort behind everything else. Adjust as needed.
 
 ---
 
@@ -55,8 +54,8 @@ Bounding-box sorting. More setup, but uses Unreal Engine's built-in sorting syst
 
 1. Add a **PaperBox** component to your actor.
 2. Make your sprites and flipbooks **children** of PaperBox in the component hierarchy.
-3. Place them so that their sorting origin is the center of the PaperBox (the center is marked with a dashed line and a cross hair)
-4. The box auto-sizes to fit child sprites and flipbooks in the editor (when **Auto Fit Box** is enabled).
+3. Place them so that their sorting origin is the center of the PaperBox (the center is marked with a base line and the box wireframe).
+4. The box auto-sizes to fit child sprites and flipbooks in the editor (when **Auto-Fit Box** is enabled).
 
 ![PaperBox hierarchy](insert_image: component hierarchy showing sprites as children of PaperBox)
 
@@ -66,6 +65,8 @@ Bounding-box sorting. More setup, but uses Unreal Engine's built-in sorting syst
 
 | Property | Description |
 |----------|-------------|
-| **Update In Game** | Recalculate bounding box every frame at runtime. Enable for sprites that change size or altitude during gameplay (animations with varying dimensions, flying sprites). Disable for static props and backgrounds — the bounds are set once and never tick, giving you zero runtime cost. |
-| **Auto Fit Box** | Editor only. When enabled, the box automatically adjusts its bounds to fit all child sprites and flipbooks whenever they are added or moved. When disabled, the box stays where you left it — an **Auto Fit** button available with `Auto Fit Box` unchecked. It lets you trigger a one-time auto fit, after which you can continue to adjust the box manually. |
-| **Box Padding** | Extra padding around the auto-calculated extents (only when Update In Game is off). |
+| **Update In Game** | Recalculate bounding box every frame at runtime. Enable for sprites that change size or altitude during gameplay (animations with varying dimensions, flying sprites). Disable for fixed-size animations, static props and backgrounds — the bounds are set once and never tick, giving you zero runtime cost. When enabled, all editor-only options below are greyed out. |
+| **Auto-Fit Box** | Editor only. When enabled, the box continuously adjusts its bounds to fit all child sprites and flipbooks whenever they are added or moved. Greyed out when Update In Game is enabled. |
+| **Box Padding** | Extra padding around the auto-calculated extents. Only available when Auto-Fit Box is enabled (and Update In Game is disabled). |
+| **Auto-Fit Once** | Button. Performs a one-time fit of the box to child bounds (without padding). Only available when Auto-Fit Box is disabled and Update In Game is disabled. After fitting, you can continue to adjust the box manually via Box Extent. |
+| **Box Extent** | Manual XY size control. Only available when both Auto-Fit Box and Update In Game are disabled. Lets you set the box dimensions directly. |

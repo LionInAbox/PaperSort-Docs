@@ -51,13 +51,17 @@ When a character walks off a ledge, the collision system can push them sideways 
 
 #### Shadow Tracking
 
-When a character is airborne, the shadow stays on the ground below them automatically.
+When a character is airborne, the shadow stays on the ground below them automatically. The shadow can also shrink and fade with distance to create a natural sense of depth.
 
 | Property | Description |
 |----------|-------------|
 | **Shadow Component** | A sprite or flipbook to use as ground shadow. Stays at ground level when airborne. Auto-selects PaperShadow if one exists. |
 | **Shadow Trace Distance** | Max downward distance to find ground for shadow placement. Shadow hides if no ground is found. |
-| **Use Collision Shape for Shadow Positioning** | Full shape sweep instead of center ray. Slighly more expensive, but more accurate shadow placement near ledges, needed when jumping or flying over ramps and elevated areas. |
+| **Use Collision Shape for Shadow Positioning** | Full shape sweep instead of center ray. Slightly more expensive, but more accurate shadow placement near ledges, needed when jumping or flying over ramps and elevated areas. |
+| **Shrink with Distance** | The shadow scales down linearly as distance to the ground increases. At ground level the shadow is full size; at the vanish distance it disappears. Enabled by default. |
+| **Vanish Distance** | The distance at which the shadow reaches zero scale. Default 500. |
+| **Fade Opacity with Distance** | The shadow's opacity fades linearly as distance to the ground increases. Stacks with the base opacity set on the shadow component. Enabled by default. |
+| **Opacity Vanish Distance** | The distance at which the shadow becomes fully transparent. Default 300. |
 
 #### Debug (Editor Only)
 

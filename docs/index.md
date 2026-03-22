@@ -2,7 +2,7 @@
 
 **Advanced 2D sprite sorting and altitude simulation for Paper2D.**
 
-PaperSort gives you everything you need to handle Y-based depth sorting, height illusions, movement, and shadows for Paper2D games — all from simple, drop-in components.
+PaperSort gives you everything you need to handle Y-based depth sorting, height illusions, collision, and shadows for Paper2D games — all from simple, drop-in components.
 
 ![Plugin overview banner](insert_image: banner showing a 2D scene with correctly sorted sprites at different depths)
 
@@ -58,13 +58,13 @@ The background tile map needs a Translucent Sort Priority low enough that sorted
 
 The PaperSort plugin comes with two sorting components, **PaperSort** and **PaperBox**, that both automate 2D sprite sorting on the Y axis.
 
-PaperSort's and PaperBox's sorting mechanisms are two separate systems and don't work together. PaperSort sets the Translucency Sort Priority of each sprite to it's y value. PaperBox uses Unreal Engine's built-in Sort by Axis ordering. PaperSort is much easier to set up than PaperBox, but is less performant (up to +1000 moving sprites, versus PaperBox multiple 10000 moving sprites)
+PaperSort's and PaperBox's sorting mechanisms are two separate systems and don't work together. PaperSort sets the Translucency Sort Priority of each sprite to it's y value. PaperBox uses Unreal Engine's built-in Sort by Axis ordering. PaperSort is much easier to set up than PaperBox, but is less performant (up to +1000 moving sprites, versus PaperBox several 10000 moving sprites)
 
 #### Comparison: PaperSort vs. PaperBox Component
 
 | | PaperSort | PaperBox |
 |---|---|---|
-| **Effort** | Drop in, done (+ set background map's Translucent Sort Priority to -1,000,000) | Requires project settings + hierarchy setup |
+| **Effort** | Drop in, done (+ set background map's Translucent Sort Priority to -1,000,000) | Requires project settings + hierarchy setup + positioning sprites around box center |
 | **Performance** | Good — up to 1,000+ sprites | Excellent — 10,000+ sprites |
 | **How it sorts** | Sets TranslucentSortPriority per sprite | Uses UE's built-in Translucent Sort Policy |
 | **Runtime cost** | Centralized subsystem tick | Zero when Update In Game is off; per-frame when on |
